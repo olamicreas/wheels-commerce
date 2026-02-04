@@ -7,23 +7,25 @@ import {
   ChevronRight, 
   Star, 
   Filter, 
-  Package, 
   Truck, 
-  ShieldCheck, 
-  Phone,
   Heart,
   User,
   ArrowRight,
-  Zap,
   Check,
   Info,
   Minus,
   Plus,
+  MousePointerClick,
   ArrowLeft,
-  MousePointerClick
+  LayoutGrid,
+  Shield,
+  FileText,
+  Lock,
+  Building2,
+  Mail
 } from 'lucide-react';
 
-// --- Mock Data with B2B Details ---
+// --- Mock Data ---
 const CATEGORIES = [
   { id: 'all', name: 'All Departments' },
   { id: 'supplies', name: 'Office Supplies' },
@@ -33,8 +35,9 @@ const CATEGORIES = [
   { id: 'cleaning', name: 'Janitorial' },
 ];
 
-// Enhanced Product Data with VALID Image Links
+// Expanded Product List (approx 10 per category)
 const PRODUCTS = [
+  // --- FURNITURE ---
   {
     id: 1,
     title: 'Ergonomic Mesh Task Chair',
@@ -42,17 +45,12 @@ const PRODUCTS = [
     price: 189.99,
     rating: 4.8,
     reviews: 124,
-    // Modern Office Chair
     image: 'https://images.unsplash.com/photo-1505843490538-5133c6c7d0e1?auto=format&fit=crop&q=80&w=800', 
-    description: 'Breathable mesh back with adjustable lumbar support and padded seat functionality for all-day comfort. Features 360-degree swivel and smooth-rolling casters.',
+    description: 'Breathable mesh back with adjustable lumbar support.',
     sku: 'FUR-2910',
     stock: 450,
-    specs: { 'Material': 'Mesh/Nylon', 'Weight Cap': '275 lbs', 'Warranty': '5 Years' },
-    bulkPricing: [
-      { min: 1, price: 189.99 },
-      { min: 10, price: 175.00 },
-      { min: 50, price: 160.00 }
-    ]
+    specs: { 'Material': 'Mesh', 'Weight Cap': '275 lbs' },
+    bulkPricing: [{ min: 1, price: 189.99 }, { min: 10, price: 175.00 }]
   },
   {
     id: 2,
@@ -61,18 +59,113 @@ const PRODUCTS = [
     price: 459.00,
     rating: 4.9,
     reviews: 45,
-    // Modern Wooden Desk
-    image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&q=80&w=800', 
-    description: 'Premium mahogany finish with built-in cable management and spacious drawers. Scratch-resistant surface.',
+    image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?auto=format&fit=crop&q=80&w=800', 
+    description: 'Premium mahogany finish with built-in cable management.',
     sku: 'FUR-9921',
     stock: 85,
-    specs: { 'Width': '60 inches', 'Depth': '30 inches', 'Finish': 'Mahogany' },
-    bulkPricing: [
-      { min: 1, price: 459.00 },
-      { min: 5, price: 430.00 },
-      { min: 20, price: 400.00 }
-    ]
+    specs: { 'Width': '60 inches', 'Finish': 'Mahogany' },
+    bulkPricing: [{ min: 1, price: 459.00 }, { min: 5, price: 430.00 }]
   },
+  {
+    id: 101,
+    title: 'Modern Standing Desk',
+    category: 'furniture',
+    price: 299.00,
+    rating: 4.7,
+    reviews: 88,
+    image: 'https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&q=80&w=800',
+    description: 'Electric height adjustable desk with memory settings.',
+    sku: 'FUR-3301',
+    stock: 120,
+    specs: { 'Height': '24-50 inches', 'Motor': 'Dual' },
+    bulkPricing: [{ min: 1, price: 299.00 }, { min: 5, price: 275.00 }]
+  },
+  {
+    id: 102,
+    title: 'Conference Table (10ft)',
+    category: 'furniture',
+    price: 899.00,
+    rating: 4.6,
+    reviews: 32,
+    image: 'https://images.unsplash.com/photo-1611269154421-4e27c41ebfg7?auto=format&fit=crop&q=80&w=800', // Placeholder
+    description: 'Spacious conference table with power outlets.',
+    sku: 'FUR-8810',
+    stock: 20,
+    specs: { 'Seats': '10-12', 'Material': 'Oak Veneer' },
+    bulkPricing: [{ min: 1, price: 899.00 }, { min: 3, price: 850.00 }]
+  },
+  {
+    id: 103,
+    title: 'Leather Reception Sofa',
+    category: 'furniture',
+    price: 650.00,
+    rating: 4.8,
+    reviews: 56,
+    image: 'https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&q=80&w=800',
+    description: 'Black leather sofa for waiting areas.',
+    sku: 'FUR-5521',
+    stock: 40,
+    specs: { 'Material': 'Genuine Leather', 'Color': 'Black' },
+    bulkPricing: [{ min: 1, price: 650.00 }, { min: 5, price: 600.00 }]
+  },
+  {
+    id: 104,
+    title: 'Steel Filing Cabinet (4-Drawer)',
+    category: 'furniture',
+    price: 180.00,
+    rating: 4.5,
+    reviews: 210,
+    image: 'https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&q=80&w=800',
+    description: 'Vertical locking filing cabinet.',
+    sku: 'FUR-1102',
+    stock: 200,
+    specs: { 'Drawers': '4', 'Lock': 'Keyed' },
+    bulkPricing: [{ min: 1, price: 180.00 }, { min: 10, price: 160.00 }]
+  },
+  {
+    id: 105,
+    title: 'Office Bookshelf',
+    category: 'furniture',
+    price: 120.00,
+    rating: 4.4,
+    reviews: 89,
+    image: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&q=80&w=800',
+    description: '5-shelf standard bookcase.',
+    sku: 'FUR-2201',
+    stock: 150,
+    specs: { 'Height': '72 inches', 'Color': 'Espresso' },
+    bulkPricing: [{ min: 1, price: 120.00 }, { min: 10, price: 100.00 }]
+  },
+  {
+    id: 106,
+    title: 'Floor Lamp',
+    category: 'furniture',
+    price: 45.99,
+    rating: 4.3,
+    reviews: 67,
+    image: 'https://images.unsplash.com/photo-1513506003013-d53163183a9a?auto=format&fit=crop&q=80&w=800',
+    description: 'Modern LED floor lamp for lounge areas.',
+    sku: 'FUR-LED1',
+    stock: 300,
+    specs: { 'Bulb': 'LED', 'Height': '60 inches' },
+    bulkPricing: [{ min: 1, price: 45.99 }, { min: 20, price: 40.00 }]
+  },
+  {
+    id: 107,
+    title: 'Rolling Whiteboard',
+    category: 'furniture',
+    price: 210.00,
+    rating: 4.7,
+    reviews: 45,
+    image: 'https://images.unsplash.com/photo-1531403009284-440f080d1e12?auto=format&fit=crop&q=80&w=800',
+    description: 'Double-sided magnetic whiteboard on wheels.',
+    sku: 'FUR-WB01',
+    stock: 90,
+    specs: { 'Size': '4x3 ft', 'Surface': 'Magnetic' },
+    bulkPricing: [{ min: 1, price: 210.00 }, { min: 5, price: 195.00 }]
+  },
+
+  // --- TECH ---
   {
     id: 3,
     title: 'Wireless Mechanical Keyboard',
@@ -80,17 +173,12 @@ const PRODUCTS = [
     price: 129.50,
     rating: 4.7,
     reviews: 890,
-    // Mechanical Keyboard
-    image: 'https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&q=80&w=800',
-    description: 'Tactile switches with multi-device bluetooth connectivity and long battery life. RGB backlit keys.',
+    image: 'https://images.unsplash.com/photo-1587829741301-dc798b91add1?auto=format&fit=crop&q=80&w=800',
+    description: 'Tactile switches with multi-device bluetooth.',
     sku: 'TEC-1029',
     stock: 1200,
-    specs: { 'Switch': 'Cherry MX Blue', 'Battery': '40 Hours', 'Connection': 'BT 5.0' },
-    bulkPricing: [
-      { min: 1, price: 129.50 },
-      { min: 20, price: 115.00 },
-      { min: 100, price: 105.00 }
-    ]
+    specs: { 'Switch': 'Cherry MX', 'Conn': 'BT 5.0' },
+    bulkPricing: [{ min: 1, price: 129.50 }, { min: 20, price: 115.00 }]
   },
   {
     id: 4,
@@ -99,18 +187,113 @@ const PRODUCTS = [
     price: 349.99,
     rating: 4.6,
     reviews: 210,
-    // Computer Monitor
     image: 'https://images.unsplash.com/photo-1547394765-185e1e68f34e?auto=format&fit=crop&q=80&w=800',
-    description: 'Crystal clear resolution with color accuracy perfect for designers. Adjustable stand included.',
+    description: 'Crystal clear resolution with color accuracy.',
     sku: 'TEC-3310',
     stock: 300,
-    specs: { 'Refresh Rate': '60Hz', 'Panel': 'IPS', 'Inputs': 'HDMI, DP' },
-    bulkPricing: [
-      { min: 1, price: 349.99 },
-      { min: 10, price: 330.00 },
-      { min: 50, price: 310.00 }
-    ]
+    specs: { 'Panel': 'IPS', 'Refresh': '60Hz' },
+    bulkPricing: [{ min: 1, price: 349.99 }, { min: 10, price: 330.00 }]
   },
+  {
+    id: 201,
+    title: 'Business Laptop 15"',
+    category: 'tech',
+    price: 899.00,
+    rating: 4.5,
+    reviews: 120,
+    image: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&q=80&w=800',
+    description: 'Reliable workhorse laptop with i7 processor.',
+    sku: 'TEC-LAP1',
+    stock: 150,
+    specs: { 'RAM': '16GB', 'SSD': '512GB' },
+    bulkPricing: [{ min: 1, price: 899.00 }, { min: 5, price: 850.00 }]
+  },
+  {
+    id: 202,
+    title: 'Wireless Ergonomic Mouse',
+    category: 'tech',
+    price: 39.99,
+    rating: 4.8,
+    reviews: 450,
+    image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?auto=format&fit=crop&q=80&w=800',
+    description: 'Reduces wrist strain. Long battery life.',
+    sku: 'TEC-MOU1',
+    stock: 2000,
+    specs: { 'DPI': '4000', 'Type': 'Laser' },
+    bulkPricing: [{ min: 1, price: 39.99 }, { min: 20, price: 35.00 }]
+  },
+  {
+    id: 203,
+    title: 'HD Webcam 1080p',
+    category: 'tech',
+    price: 59.99,
+    rating: 4.4,
+    reviews: 320,
+    image: 'https://images.unsplash.com/photo-1590334882193-4ee52b04f762?auto=format&fit=crop&q=80&w=800', // Placeholder
+    description: 'Wide angle webcam for conference calls.',
+    sku: 'TEC-CAM1',
+    stock: 600,
+    specs: { 'Res': '1080p', 'Mic': 'Stereo' },
+    bulkPricing: [{ min: 1, price: 59.99 }, { min: 10, price: 55.00 }]
+  },
+  {
+    id: 204,
+    title: 'Noise Cancelling Headset',
+    category: 'tech',
+    price: 149.99,
+    rating: 4.7,
+    reviews: 210,
+    image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&q=80&w=800',
+    description: 'Premium audio with active noise cancellation.',
+    sku: 'TEC-HEAD1',
+    stock: 400,
+    specs: { 'Type': 'Over-ear', 'Wireless': 'Yes' },
+    bulkPricing: [{ min: 1, price: 149.99 }, { min: 20, price: 135.00 }]
+  },
+  {
+    id: 205,
+    title: 'Network Router WiFi 6',
+    category: 'tech',
+    price: 199.99,
+    rating: 4.6,
+    reviews: 89,
+    image: 'https://images.unsplash.com/photo-1544197150-b99a580bbc7c?auto=format&fit=crop&q=80&w=800',
+    description: 'High speed internet router for small offices.',
+    sku: 'TEC-ROUT1',
+    stock: 120,
+    specs: { 'Speed': 'AX3000', 'Ports': '4' },
+    bulkPricing: [{ min: 1, price: 199.99 }, { min: 5, price: 190.00 }]
+  },
+  {
+    id: 206,
+    title: 'HDMI Cable (10ft)',
+    category: 'tech',
+    price: 12.99,
+    rating: 4.5,
+    reviews: 1200,
+    image: 'https://images.unsplash.com/photo-1558507340-a33753234479?auto=format&fit=crop&q=80&w=800', // Placeholder
+    description: 'High speed braided HDMI cable.',
+    sku: 'TEC-CAB1',
+    stock: 5000,
+    specs: { 'Length': '10ft', 'Ver': '2.1' },
+    bulkPricing: [{ min: 1, price: 12.99 }, { min: 50, price: 10.00 }]
+  },
+  {
+    id: 207,
+    title: 'External SSD 1TB',
+    category: 'tech',
+    price: 119.00,
+    rating: 4.9,
+    reviews: 340,
+    image: 'https://images.unsplash.com/photo-1597872258021-e9e3d64166c7?auto=format&fit=crop&q=80&w=800',
+    description: 'Rugged portable storage.',
+    sku: 'TEC-SSD1',
+    stock: 250,
+    specs: { 'Cap': '1TB', 'Speed': '1050MB/s' },
+    bulkPricing: [{ min: 1, price: 119.00 }, { min: 10, price: 110.00 }]
+  },
+
+  // --- OFFICE SUPPLIES ---
   {
     id: 5,
     title: 'Premium Copy Paper (Case)',
@@ -118,17 +301,12 @@ const PRODUCTS = [
     price: 42.99,
     rating: 4.5,
     reviews: 1500,
-    // Stack of Books/Paper
     image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&q=80&w=800',
-    description: 'High brightness 96 paper, perfect for high-volume printing. Jam-free guarantee.',
+    description: 'High brightness 96 paper.',
     sku: 'SUP-1001',
     stock: 5000,
-    specs: { 'Weight': '20 lb', 'Brightness': '96', 'Sheets': '5000/Case' },
-    bulkPricing: [
-      { min: 1, price: 42.99 },
-      { min: 40, price: 38.00 }, // Pallet price
-      { min: 100, price: 35.00 }
-    ]
+    specs: { 'Weight': '20 lb', 'Sheets': '5000' },
+    bulkPricing: [{ min: 1, price: 42.99 }, { min: 40, price: 38.00 }]
   },
   {
     id: 6,
@@ -137,23 +315,329 @@ const PRODUCTS = [
     price: 24.50,
     rating: 4.8,
     reviews: 340,
-    // Pens/Stationery
     image: 'https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&q=80&w=800',
-    description: 'Smooth flowing ink in assorted colors. Quick drying and smudge resistant.',
+    description: 'Smooth flowing ink in assorted colors.',
     sku: 'SUP-5520',
     stock: 800,
-    specs: { 'Tip Size': '0.7mm', 'Type': 'Gel', 'Colors': 'Assorted' },
-    bulkPricing: [
-      { min: 1, price: 24.50 },
-      { min: 20, price: 20.00 },
-      { min: 50, price: 18.00 }
-    ]
+    specs: { 'Type': 'Gel', 'Count': '24' },
+    bulkPricing: [{ min: 1, price: 24.50 }, { min: 20, price: 20.00 }]
   },
+  {
+    id: 301,
+    title: 'Heavy Duty Stapler',
+    category: 'supplies',
+    price: 15.99,
+    rating: 4.4,
+    reviews: 120,
+    image: 'https://images.unsplash.com/photo-1626294025985-709841804b40?auto=format&fit=crop&q=80&w=800',
+    description: 'Staples up to 60 sheets.',
+    sku: 'SUP-STAP1',
+    stock: 600,
+    specs: { 'Cap': '60 sheets', 'Type': 'Manual' },
+    bulkPricing: [{ min: 1, price: 15.99 }, { min: 20, price: 14.00 }]
+  },
+  {
+    id: 302,
+    title: 'Sticky Notes (12 Pads)',
+    category: 'supplies',
+    price: 9.99,
+    rating: 4.7,
+    reviews: 890,
+    image: 'https://images.unsplash.com/photo-1531346878377-a513bc95f30f?auto=format&fit=crop&q=80&w=800',
+    description: 'Yellow 3x3 sticky notes.',
+    sku: 'SUP-NOTE1',
+    stock: 3000,
+    specs: { 'Size': '3x3', 'Color': 'Yellow' },
+    bulkPricing: [{ min: 1, price: 9.99 }, { min: 50, price: 8.50 }]
+  },
+  {
+    id: 303,
+    title: 'File Folders (100 Box)',
+    category: 'supplies',
+    price: 18.50,
+    rating: 4.6,
+    reviews: 230,
+    image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&q=80&w=800', // Generic paper
+    description: 'Manila file folders letter size.',
+    sku: 'SUP-FOLD1',
+    stock: 1200,
+    specs: { 'Size': 'Letter', 'Tab': '1/3 Cut' },
+    bulkPricing: [{ min: 1, price: 18.50 }, { min: 20, price: 16.00 }]
+  },
+  {
+    id: 304,
+    title: 'Permanent Markers (12)',
+    category: 'supplies',
+    price: 12.00,
+    rating: 4.8,
+    reviews: 560,
+    image: 'https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&q=80&w=800', // Generic desk
+    description: 'Fine point black permanent markers.',
+    sku: 'SUP-MARK1',
+    stock: 1500,
+    specs: { 'Color': 'Black', 'Tip': 'Fine' },
+    bulkPricing: [{ min: 1, price: 12.00 }, { min: 50, price: 10.00 }]
+  },
+  {
+    id: 305,
+    title: 'Scotch Tape (6 Rolls)',
+    category: 'supplies',
+    price: 14.99,
+    rating: 4.7,
+    reviews: 400,
+    image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&q=80&w=800', // Generic
+    description: 'Invisible tape refill rolls.',
+    sku: 'SUP-TAPE1',
+    stock: 900,
+    specs: { 'Width': '3/4"', 'Finish': 'Matte' },
+    bulkPricing: [{ min: 1, price: 14.99 }, { min: 20, price: 13.00 }]
+  },
+  {
+    id: 306,
+    title: 'Business Envelopes #10',
+    category: 'supplies',
+    price: 22.00,
+    rating: 4.4,
+    reviews: 150,
+    image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&q=80&w=800', // Generic
+    description: 'Security tinted envelopes, box of 500.',
+    sku: 'SUP-ENV1',
+    stock: 800,
+    specs: { 'Size': '#10', 'Seal': 'Self-seal' },
+    bulkPricing: [{ min: 1, price: 22.00 }, { min: 10, price: 20.00 }]
+  },
+
+  // --- BREAKROOM ---
+  {
+    id: 401,
+    title: 'Medium Roast Coffee (5lb)',
+    category: 'breakroom',
+    price: 45.00,
+    rating: 4.8,
+    reviews: 320,
+    image: 'https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&q=80&w=800',
+    description: 'Whole bean arabica coffee blend.',
+    sku: 'BRK-COF1',
+    stock: 500,
+    specs: { 'Roast': 'Medium', 'Origin': 'Colombia' },
+    bulkPricing: [{ min: 1, price: 45.00 }, { min: 10, price: 40.00 }]
+  },
+  {
+    id: 402,
+    title: 'Paper Cups 12oz (1000)',
+    category: 'breakroom',
+    price: 65.00,
+    rating: 4.5,
+    reviews: 120,
+    image: 'https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?auto=format&fit=crop&q=80&w=800',
+    description: 'Hot beverage cups, eco-friendly.',
+    sku: 'BRK-CUP1',
+    stock: 800,
+    specs: { 'Size': '12oz', 'Material': 'Paper' },
+    bulkPricing: [{ min: 1, price: 65.00 }, { min: 5, price: 60.00 }]
+  },
+  {
+    id: 403,
+    title: 'Assorted Snacks Box',
+    category: 'breakroom',
+    price: 35.00,
+    rating: 4.9,
+    reviews: 80,
+    image: 'https://images.unsplash.com/photo-1623364639942-d3a339900227?auto=format&fit=crop&q=80&w=800',
+    description: 'Chips, nuts, and bars variety pack.',
+    sku: 'BRK-SNK1',
+    stock: 200,
+    specs: { 'Count': '50', 'Type': 'Variety' },
+    bulkPricing: [{ min: 1, price: 35.00 }, { min: 10, price: 32.00 }]
+  },
+  {
+    id: 404,
+    title: 'Spring Water (24 Pack)',
+    category: 'breakroom',
+    price: 12.99,
+    rating: 4.7,
+    reviews: 500,
+    image: 'https://images.unsplash.com/photo-1560023907-5f339617ea30?auto=format&fit=crop&q=80&w=800',
+    description: 'Bottled spring water 16.9oz.',
+    sku: 'BRK-H2O1',
+    stock: 1000,
+    specs: { 'Vol': '500ml', 'Pack': '24' },
+    bulkPricing: [{ min: 1, price: 12.99 }, { min: 40, price: 10.00 }]
+  },
+  {
+    id: 405,
+    title: 'Plastic Utensils Set',
+    category: 'breakroom',
+    price: 18.00,
+    rating: 4.4,
+    reviews: 90,
+    image: 'https://images.unsplash.com/photo-1585671759404-03709de2412e?auto=format&fit=crop&q=80&w=800', // Placeholder
+    description: 'Forks, spoons, knives heavy duty.',
+    sku: 'BRK-FORK1',
+    stock: 600,
+    specs: { 'Count': '300', 'Color': 'White' },
+    bulkPricing: [{ min: 1, price: 18.00 }, { min: 10, price: 16.00 }]
+  },
+  {
+    id: 406,
+    title: 'Green Tea Bags (100)',
+    category: 'breakroom',
+    price: 15.50,
+    rating: 4.8,
+    reviews: 210,
+    image: 'https://images.unsplash.com/photo-1627435601361-ec25f5b1d0e5?auto=format&fit=crop&q=80&w=800',
+    description: 'Organic green tea bags.',
+    sku: 'BRK-TEA1',
+    stock: 400,
+    specs: { 'Type': 'Green', 'Count': '100' },
+    bulkPricing: [{ min: 1, price: 15.50 }, { min: 10, price: 14.00 }]
+  },
+  {
+    id: 407,
+    title: 'Paper Napkins (Pack 500)',
+    category: 'breakroom',
+    price: 9.00,
+    rating: 4.3,
+    reviews: 150,
+    image: 'https://images.unsplash.com/photo-1584622050111-993a426fbf0a?auto=format&fit=crop&q=80&w=800', // Placeholder
+    description: 'White beverage napkins.',
+    sku: 'BRK-NAP1',
+    stock: 800,
+    specs: { 'Ply': '1-Ply', 'Count': '500' },
+    bulkPricing: [{ min: 1, price: 9.00 }, { min: 20, price: 8.00 }]
+  },
+  {
+    id: 408,
+    title: 'Sugar Canisters (Pack 3)',
+    category: 'breakroom',
+    price: 10.00,
+    rating: 4.6,
+    reviews: 110,
+    image: 'https://images.unsplash.com/photo-1584736686461-a4891129f957?auto=format&fit=crop&q=80&w=800', // Placeholder
+    description: 'Pure cane sugar pour canisters.',
+    sku: 'BRK-SUG1',
+    stock: 300,
+    specs: { 'Wt': '20oz', 'Count': '3' },
+    bulkPricing: [{ min: 1, price: 10.00 }, { min: 20, price: 9.00 }]
+  },
+
+  // --- JANITORIAL ---
+  {
+    id: 501,
+    title: 'All-Purpose Cleaner (Gal)',
+    category: 'cleaning',
+    price: 14.99,
+    rating: 4.7,
+    reviews: 230,
+    image: 'https://images.unsplash.com/photo-1584622050111-993a426fbf0a?auto=format&fit=crop&q=80&w=800',
+    description: 'Industrial strength multi-surface cleaner.',
+    sku: 'CLN-ALL1',
+    stock: 400,
+    specs: { 'Vol': '1 Gallon', 'Scent': 'Lemon' },
+    bulkPricing: [{ min: 1, price: 14.99 }, { min: 4, price: 12.00 }]
+  },
+  {
+    id: 502,
+    title: 'Paper Towels (12 Rolls)',
+    category: 'cleaning',
+    price: 28.00,
+    rating: 4.6,
+    reviews: 560,
+    image: 'https://images.unsplash.com/photo-1583947581924-860bda6a26df?auto=format&fit=crop&q=80&w=800',
+    description: 'High absorbency paper towels.',
+    sku: 'CLN-TOW1',
+    stock: 1200,
+    specs: { 'Ply': '2-Ply', 'Count': '12' },
+    bulkPricing: [{ min: 1, price: 28.00 }, { min: 10, price: 25.00 }]
+  },
+  {
+    id: 503,
+    title: 'Hand Sanitizer (Gal)',
+    category: 'cleaning',
+    price: 35.00,
+    rating: 4.8,
+    reviews: 400,
+    image: 'https://images.unsplash.com/photo-1584483766114-2cea6fac257d?auto=format&fit=crop&q=80&w=800',
+    description: '70% Alcohol gel sanitizer refill.',
+    sku: 'CLN-SAN1',
+    stock: 800,
+    specs: { 'Vol': '1 Gallon', 'Alcohol': '70%' },
+    bulkPricing: [{ min: 1, price: 35.00 }, { min: 4, price: 30.00 }]
+  },
+  {
+    id: 504,
+    title: 'Trash Bags 13G (100)',
+    category: 'cleaning',
+    price: 19.99,
+    rating: 4.5,
+    reviews: 320,
+    image: 'https://images.unsplash.com/photo-1622976655182-35805566085e?auto=format&fit=crop&q=80&w=800', // Placeholder
+    description: 'Heavy duty drawstring kitchen bags.',
+    sku: 'CLN-BAG1',
+    stock: 600,
+    specs: { 'Size': '13 Gal', 'Count': '100' },
+    bulkPricing: [{ min: 1, price: 19.99 }, { min: 10, price: 18.00 }]
+  },
+  {
+    id: 505,
+    title: 'Microfiber Cloths (24)',
+    category: 'cleaning',
+    price: 16.50,
+    rating: 4.9,
+    reviews: 210,
+    image: 'https://images.unsplash.com/photo-1581557991964-125469da3b8a?auto=format&fit=crop&q=80&w=800', // Placeholder
+    description: 'Lint-free cleaning cloths.',
+    sku: 'CLN-CLTH1',
+    stock: 900,
+    specs: { 'Size': '12x12', 'Color': 'Blue' },
+    bulkPricing: [{ min: 1, price: 16.50 }, { min: 10, price: 15.00 }]
+  },
+  {
+    id: 506,
+    title: 'Liquid Hand Soap (4 Gal)',
+    category: 'cleaning',
+    price: 45.00,
+    rating: 4.4,
+    reviews: 180,
+    image: 'https://images.unsplash.com/photo-1585832664987-9b626154620a?auto=format&fit=crop&q=80&w=800', // Placeholder
+    description: 'Moisturizing hand soap refill case.',
+    sku: 'CLN-SOAP1',
+    stock: 300,
+    specs: { 'Vol': '4 Gallon', 'Scent': 'Aloe' },
+    bulkPricing: [{ min: 1, price: 45.00 }, { min: 5, price: 40.00 }]
+  },
+  {
+    id: 507,
+    title: 'Industrial Mop Head',
+    category: 'cleaning',
+    price: 9.99,
+    rating: 4.3,
+    reviews: 80,
+    image: 'https://images.unsplash.com/photo-1527512860502-ce2200dc89d6?auto=format&fit=crop&q=80&w=800', // Placeholder
+    description: 'Cotton loop end mop head replacement.',
+    sku: 'CLN-MOP1',
+    stock: 500,
+    specs: { 'Mat': 'Cotton', 'Size': 'Large' },
+    bulkPricing: [{ min: 1, price: 9.99 }, { min: 20, price: 8.50 }]
+  },
+  {
+    id: 508,
+    title: 'Disinfectant Spray (12)',
+    category: 'cleaning',
+    price: 38.00,
+    rating: 4.8,
+    reviews: 600,
+    image: 'https://images.unsplash.com/photo-1584483766114-2cea6fac257d?auto=format&fit=crop&q=80&w=800', // Placeholder
+    description: 'Kills 99.9% of viruses and bacteria.',
+    sku: 'CLN-SPRY1',
+    stock: 400,
+    specs: { 'Count': '12 cans', 'Oz': '19oz' },
+    bulkPricing: [{ min: 1, price: 38.00 }, { min: 10, price: 35.00 }]
+  }
 ];
 
 // --- Sub-Components ---
 
-// 1. Reusable Button
 const Button = ({ children, variant = 'primary', className = '', ...props }) => {
   const baseStyle = "px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed";
   const variants = {
@@ -171,7 +655,6 @@ const Button = ({ children, variant = 'primary', className = '', ...props }) => 
   );
 };
 
-// 2. Notification Toast
 const Toast = ({ message, type = 'success', onClose }) => {
   useEffect(() => {
     const timer = setTimeout(onClose, 3000);
@@ -188,7 +671,6 @@ const Toast = ({ message, type = 'success', onClose }) => {
   );
 };
 
-// 3. Product Card (Grid View)
 const ProductCard = ({ product, onAdd, onView, isLiked, onToggleLike }) => (
   <div 
     className="group bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-xl transition-all duration-300 flex flex-col h-full hover:border-blue-200 cursor-pointer"
@@ -202,7 +684,7 @@ const ProductCard = ({ product, onAdd, onView, isLiked, onToggleLike }) => (
       />
       <button 
         onClick={(e) => {
-          e.stopPropagation(); // Prevent opening modal
+          e.stopPropagation(); 
           onToggleLike(product.id);
         }}
         className={`absolute top-3 right-3 p-2 rounded-full shadow-md transition-colors z-10 ${
@@ -254,22 +736,16 @@ const ProductCard = ({ product, onAdd, onView, isLiked, onToggleLike }) => (
   </div>
 );
 
-// 4. Detailed Product Modal
 const ProductDetailModal = ({ product, isOpen, onClose, onAdd, isLiked, onToggleLike }) => {
   const [qty, setQty] = useState(1);
   const [currentPrice, setCurrentPrice] = useState(product?.price || 0);
 
-  // Reset qty when product changes
   useEffect(() => {
-    if (isOpen) {
-      setQty(1);
-    }
+    if (isOpen) setQty(1);
   }, [isOpen, product]);
 
-  // Calculate Bulk Price dynamically
   useEffect(() => {
     if (!product) return;
-    // Find the active tier
     const activeTier = [...product.bulkPricing].reverse().find(tier => qty >= tier.min);
     setCurrentPrice(activeTier ? activeTier.price : product.price);
   }, [qty, product]);
@@ -282,12 +758,10 @@ const ProductDetailModal = ({ product, isOpen, onClose, onAdd, isLiked, onToggle
       
       <div className="relative w-full max-w-5xl bg-white h-full sm:h-auto sm:max-h-[90vh] rounded-none sm:rounded-2xl shadow-2xl overflow-hidden flex flex-col sm:flex-row animate-in zoom-in-95 duration-200">
         
-        {/* Mobile Close Button */}
         <button onClick={onClose} className="absolute top-4 right-4 z-10 p-2 bg-white/80 rounded-full sm:hidden">
           <X size={24} />
         </button>
 
-        {/* Left: Image */}
         <div className="w-full sm:w-1/2 bg-gray-100 relative group">
           <img src={product.image} alt={product.title} className="w-full h-64 sm:h-full object-cover" />
           <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-semibold shadow-sm">
@@ -295,11 +769,8 @@ const ProductDetailModal = ({ product, isOpen, onClose, onAdd, isLiked, onToggle
           </div>
         </div>
 
-        {/* Right: Details */}
         <div className="w-full sm:w-1/2 flex flex-col bg-white overflow-y-auto max-h-[60vh] sm:max-h-full">
           <div className="p-6 sm:p-8 flex-1">
-            
-            {/* Header */}
             <div className="flex justify-between items-start mb-4">
                <div>
                   <span className="text-blue-600 font-bold text-sm uppercase tracking-wide">{product.category}</span>
@@ -310,7 +781,6 @@ const ProductDetailModal = ({ product, isOpen, onClose, onAdd, isLiked, onToggle
                </button>
             </div>
 
-            {/* Ratings & Stock */}
             <div className="flex items-center gap-4 mb-6 text-sm">
                <div className="flex items-center text-yellow-500">
                   <Star fill="currentColor" size={16} /> 
@@ -323,12 +793,10 @@ const ProductDetailModal = ({ product, isOpen, onClose, onAdd, isLiked, onToggle
                </div>
             </div>
 
-            {/* Description */}
             <p className="text-gray-600 leading-relaxed mb-6">
               {product.description}
             </p>
 
-            {/* Specs Grid */}
             <div className="grid grid-cols-2 gap-4 mb-8">
               {Object.entries(product.specs).map(([key, value]) => (
                 <div key={key} className="bg-gray-50 p-3 rounded-lg">
@@ -338,7 +806,6 @@ const ProductDetailModal = ({ product, isOpen, onClose, onAdd, isLiked, onToggle
               ))}
             </div>
 
-            {/* Bulk Pricing Table (INTERACTIVE) */}
             <div className="mb-8 border border-blue-100 rounded-xl overflow-hidden">
                <div className="bg-blue-50 px-4 py-2 flex justify-between items-center">
                   <span className="text-xs font-bold text-blue-800 uppercase tracking-wide">Volume Pricing</span>
@@ -347,20 +814,15 @@ const ProductDetailModal = ({ product, isOpen, onClose, onAdd, isLiked, onToggle
                <div className="flex divide-x divide-gray-100">
                  {product.bulkPricing.map((tier, idx) => {
                     const isActiveTier = qty >= tier.min && (idx === product.bulkPricing.length - 1 || qty < product.bulkPricing[idx + 1].min);
-                    
                     return (
                       <button 
                         key={idx} 
                         onClick={() => setQty(tier.min)}
                         className={`flex-1 p-3 text-center transition-all duration-200 cursor-pointer relative group ${
-                          qty >= tier.min 
-                          ? 'bg-blue-50/50' 
-                          : 'bg-white hover:bg-gray-50'
+                          qty >= tier.min ? 'bg-blue-50/50' : 'bg-white hover:bg-gray-50'
                         }`}
                       >
-                         {/* Selection Ring */}
                          {isActiveTier && <div className="absolute inset-0 border-2 border-blue-500 pointer-events-none"></div>}
-                         
                          <div className="text-xs text-gray-500 mb-1">Buy {tier.min}+</div>
                          <div className={`font-bold ${qty >= tier.min ? 'text-blue-700' : 'text-gray-900'}`}>
                            ${tier.price.toFixed(2)}
@@ -370,13 +832,10 @@ const ProductDetailModal = ({ product, isOpen, onClose, onAdd, isLiked, onToggle
                  })}
                </div>
             </div>
-
           </div>
 
-          {/* Bottom Actions Bar */}
           <div className="p-6 border-t border-gray-100 bg-white sticky bottom-0 z-10">
             <div className="flex flex-col gap-4">
-               
                <div className="flex items-end justify-between">
                   <div>
                     <span className="text-sm text-gray-500">Total Price</span>
@@ -390,26 +849,10 @@ const ProductDetailModal = ({ product, isOpen, onClose, onAdd, isLiked, onToggle
                     </div>
                   </div>
 
-                  {/* Qty Selector */}
                   <div className="flex items-center bg-gray-100 rounded-lg p-1">
-                    <button 
-                      onClick={() => setQty(Math.max(1, qty - 1))}
-                      className="w-10 h-10 flex items-center justify-center hover:bg-white rounded-md shadow-sm transition-all"
-                    >
-                      <Minus size={16} />
-                    </button>
-                    <input 
-                      type="number" 
-                      value={qty} 
-                      onChange={(e) => setQty(Math.max(1, parseInt(e.target.value) || 1))}
-                      className="w-16 text-center bg-transparent font-bold outline-none"
-                    />
-                    <button 
-                      onClick={() => setQty(qty + 1)}
-                      className="w-10 h-10 flex items-center justify-center hover:bg-white rounded-md shadow-sm transition-all"
-                    >
-                      <Plus size={16} />
-                    </button>
+                    <button onClick={() => setQty(Math.max(1, qty - 1))} className="w-10 h-10 flex items-center justify-center hover:bg-white rounded-md shadow-sm transition-all"><Minus size={16} /></button>
+                    <input type="number" value={qty} onChange={(e) => setQty(Math.max(1, parseInt(e.target.value) || 1))} className="w-16 text-center bg-transparent font-bold outline-none" />
+                    <button onClick={() => setQty(qty + 1)} className="w-10 h-10 flex items-center justify-center hover:bg-white rounded-md shadow-sm transition-all"><Plus size={16} /></button>
                   </div>
                </div>
 
@@ -417,24 +860,17 @@ const ProductDetailModal = ({ product, isOpen, onClose, onAdd, isLiked, onToggle
                   <button 
                     onClick={() => onToggleLike(product.id)}
                     className={`p-3 rounded-lg border flex-shrink-0 transition-colors ${
-                      isLiked 
-                      ? 'border-red-200 bg-red-50 text-red-500' 
-                      : 'border-gray-200 text-gray-400 hover:bg-gray-50'
+                      isLiked ? 'border-red-200 bg-red-50 text-red-500' : 'border-gray-200 text-gray-400 hover:bg-gray-50'
                     }`}
                   >
                     <Heart fill={isLiked ? "currentColor" : "none"} />
                   </button>
-                  <Button 
-                    className="w-full text-lg shadow-xl shadow-blue-600/20" 
-                    onClick={() => onAdd(product, qty, currentPrice)}
-                  >
+                  <Button className="w-full text-lg shadow-xl shadow-blue-600/20" onClick={() => onAdd(product, qty, currentPrice)}>
                     Add {qty} to Order
                   </Button>
                </div>
-
             </div>
           </div>
-
         </div>
       </div>
     </div>
@@ -442,36 +878,168 @@ const ProductDetailModal = ({ product, isOpen, onClose, onAdd, isLiked, onToggle
 };
 
 
+// --- VIEW COMPONENTS ---
+
+const RegistrationView = ({ onBack }) => (
+  <div className="max-w-xl mx-auto py-12 px-4 animate-in slide-in-from-bottom-5">
+    <button onClick={onBack} className="flex items-center text-gray-500 hover:text-blue-600 mb-6">
+      <ArrowLeft size={16} className="mr-2" /> Back to Shop
+    </button>
+    <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+      <div className="text-center mb-8">
+        <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+          <User size={32} />
+        </div>
+        <h2 className="text-2xl font-bold text-gray-900">Create Business Account</h2>
+        <p className="text-gray-500 mt-2">Join Wheels Commerce to access wholesale pricing.</p>
+      </div>
+
+      <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+            <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+            <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
+          </div>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+          <div className="relative">
+             <Building2 size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+             <input type="text" className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
+          </div>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Work Email</label>
+           <div className="relative">
+             <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+             <input type="email" className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
+          </div>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+           <div className="relative">
+             <Lock size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+             <input type="password" className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
+          </div>
+        </div>
+        
+        <div className="pt-4">
+          <Button className="w-full py-3 text-lg">Create Account</Button>
+        </div>
+        <p className="text-xs text-center text-gray-500 mt-4">
+          By registering, you agree to our Terms of Service and Privacy Policy.
+        </p>
+      </form>
+    </div>
+  </div>
+);
+
+const TermsView = ({ onBack }) => (
+  <div className="max-w-3xl mx-auto py-12 px-4 animate-in fade-in">
+    <button onClick={onBack} className="flex items-center text-gray-500 hover:text-blue-600 mb-6">
+      <ArrowLeft size={16} className="mr-2" /> Back
+    </button>
+    <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
+      <h1 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+        <FileText className="text-blue-600" /> Terms of Service
+      </h1>
+      <div className="prose prose-blue max-w-none text-gray-600 space-y-4">
+        <p><strong>Effective Date:</strong> January 1, 2026</p>
+        <p>Welcome to Wheels Commerce. By accessing or using our website, you agree to be bound by these Terms of Service.</p>
+        
+        <h3 className="text-lg font-bold text-gray-900">1. Acceptance of Terms</h3>
+        <p>By registering for a business account, you confirm that you have the authority to bind your organization to these terms.</p>
+
+        <h3 className="text-lg font-bold text-gray-900">2. Pricing & Payment</h3>
+        <p>All prices are listed in USD. Volume pricing is subject to change. Net-30 terms are available for qualified business accounts upon credit approval.</p>
+
+        <h3 className="text-lg font-bold text-gray-900">3. Shipping & Delivery</h3>
+        <p>We offer free shipping on bulk orders over $500. Delivery times are estimates and not guarantees. Risk of loss passes to you upon delivery to the carrier.</p>
+
+        <h3 className="text-lg font-bold text-gray-900">4. Returns</h3>
+        <p>Items may be returned within 30 days of receipt. Custom or bulk orders may be subject to a restocking fee.</p>
+      </div>
+    </div>
+  </div>
+);
+
+const PrivacyView = ({ onBack }) => (
+  <div className="max-w-3xl mx-auto py-12 px-4 animate-in fade-in">
+    <button onClick={onBack} className="flex items-center text-gray-500 hover:text-blue-600 mb-6">
+      <ArrowLeft size={16} className="mr-2" /> Back
+    </button>
+    <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
+      <h1 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+        <Shield className="text-green-600" /> Privacy Policy
+      </h1>
+      <div className="prose prose-blue max-w-none text-gray-600 space-y-4">
+        <p><strong>Last Updated:</strong> January 1, 2026</p>
+        <p>Wheels Commerce is committed to protecting your privacy. This policy explains how we collect and use your data.</p>
+        
+        <h3 className="text-lg font-bold text-gray-900">1. Information We Collect</h3>
+        <p>We collect information you provide directly to us, such as when you create an account, place an order, or contact customer support. This includes name, company details, email, and shipping address.</p>
+
+        <h3 className="text-lg font-bold text-gray-900">2. How We Use Information</h3>
+        <p>We use your information to process orders, manage your account, send transactional emails, and improve our inventory selection.</p>
+
+        <h3 className="text-lg font-bold text-gray-900">3. Data Security</h3>
+        <p>We use industry-standard encryption (SSL) to protect your payment and personal data. We do not sell your data to third parties.</p>
+      </div>
+    </div>
+  </div>
+);
+
+
 // --- Main App Logic ---
 
 export default function App() {
+  const [view, setView] = useState('shop'); // 'shop', 'wishlist', 'register', 'terms', 'privacy'
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [sortOption, setSortOption] = useState('relevance');
   
-  // App State
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
-  const [selectedProduct, setSelectedProduct] = useState(null); // For Modal
-  
-  // UI State
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [toast, setToast] = useState(null);
 
-  // Filter Logic
-  const filteredProducts = useMemo(() => {
-    return PRODUCTS.filter(product => {
-      const matchesCategory = activeCategory === 'all' || product.category === activeCategory;
-      const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
-                           product.sku.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesCategory && matchesSearch;
-    });
-  }, [activeCategory, searchQuery]);
+  // --- Processed Products (Filter -> Search -> Sort) ---
+  const processedProducts = useMemo(() => {
+    let data = [...PRODUCTS];
 
-  // Actions
+    if (view === 'wishlist') {
+      data = data.filter(p => wishlist.includes(p.id));
+    } else if (activeCategory !== 'all') {
+      data = data.filter(p => p.category === activeCategory);
+    }
+
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      data = data.filter(p => 
+        p.title.toLowerCase().includes(q) || 
+        p.sku.toLowerCase().includes(q)
+      );
+    }
+
+    switch (sortOption) {
+      case 'price-asc': data.sort((a, b) => a.price - b.price); break;
+      case 'price-desc': data.sort((a, b) => b.price - a.price); break;
+      case 'rating': data.sort((a, b) => b.rating - a.rating); break;
+      default: break;
+    }
+
+    return data;
+  }, [view, activeCategory, searchQuery, sortOption, wishlist]);
+
+
   const showToast = (msg, type = 'success') => {
     setToast({ message: msg, type });
-    // Auto clear handled by Toast component
     setTimeout(() => setToast(null), 3000); 
   };
 
@@ -488,64 +1056,66 @@ export default function App() {
   };
 
   const addToCart = (product, quantity = 1, priceOverride = null) => {
-    // If modal passes a specific price (due to bulk tier), use it. Otherwise use base price.
     const finalPrice = priceOverride || product.price;
-
     setCart(prev => {
       const existing = prev.find(item => item.id === product.id);
       if (existing) {
-        // If price changed due to bulk tier, we update the price too for simplicity in this prototype
         return prev.map(item => 
           item.id === product.id ? { ...item, qty: item.qty + quantity, price: finalPrice } : item
         );
       }
       return [...prev, { ...product, qty: quantity, price: finalPrice }];
     });
-    
-    // Close modal if open
     setSelectedProduct(null);
     setIsCartOpen(true);
     showToast(`Added ${quantity} items to cart`);
   };
 
-  const removeFromCart = (id) => {
-    setCart(prev => prev.filter(item => item.id !== id));
-  };
-
+  const removeFromCart = (id) => setCart(prev => prev.filter(item => item.id !== id));
+  
   const updateCartQty = (id, delta) => {
     setCart(prev => prev.map(item => {
-      if (item.id === id) {
-        return { ...item, qty: Math.max(1, item.qty + delta) };
-      }
+      if (item.id === id) return { ...item, qty: Math.max(1, item.qty + delta) };
       return item;
     }));
+  };
+
+  const handleCheckout = () => {
+    setIsCartOpen(false);
+    setView('register');
   };
 
   const cartTotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
   const cartCount = cart.reduce((acc, item) => acc + item.qty, 0);
 
+  // Navigation Handlers
+  const handleCategoryClick = (id) => {
+    setActiveCategory(id);
+    setView('shop');
+    setIsMobileMenuOpen(false);
+  };
+
+  const handleWishlistClick = () => {
+    setView('wishlist');
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans text-gray-900 relative">
-      
-      {/* Toast Notification Container */}
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
 
-      {/* Top Banner */}
       <div className="bg-slate-900 text-white text-xs py-2 px-4 text-center">
         <span className="font-medium">Fast Nationwide Delivery</span> | Business accounts get <span className="underline cursor-pointer">Net-30 Terms</span>
       </div>
 
-      {/* Header */}
       <header className="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20 gap-8">
-            
-            {/* Logo */}
             <div className="flex items-center gap-3">
               <button className="lg:hidden p-2 -ml-2 text-gray-600" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
                 <Menu size={24} />
               </button>
-              <div className="flex items-center gap-2 cursor-pointer" onClick={() => {setActiveCategory('all'); setSearchQuery('')}}>
+              <div className="flex items-center gap-2 cursor-pointer" onClick={() => {setActiveCategory('all'); setView('shop'); setSearchQuery('')}}>
                 <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white shadow-lg shadow-blue-600/20">
                   <Truck size={24} className="transform -scale-x-100" />
                 </div>
@@ -556,11 +1126,10 @@ export default function App() {
               </div>
             </div>
 
-            {/* Search Bar */}
             <div className="hidden lg:flex flex-1 max-w-2xl relative">
               <input
                 type="text"
-                placeholder="Search products by name, SKU, or category..."
+                placeholder={view === 'wishlist' ? "Search your wishlist..." : "Search products by name, SKU, or category..."}
                 className="w-full pl-12 pr-4 py-3 bg-gray-100 border-transparent focus:bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 rounded-xl outline-none transition-all duration-200"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -568,14 +1137,19 @@ export default function App() {
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400" size={20} />
             </div>
 
-            {/* Header Actions */}
             <div className="flex items-center gap-2 sm:gap-4">
               <div className="hidden sm:flex items-center gap-4 mr-2">
-                 <button className="flex flex-col items-center text-gray-500 hover:text-blue-600">
+                 <button 
+                   className="flex flex-col items-center text-gray-500 hover:text-blue-600"
+                   onClick={() => setView('register')}
+                 >
                     <User size={20} />
                     <span className="text-[10px] font-bold mt-1">ACCOUNT</span>
                  </button>
-                 <button className="flex flex-col items-center text-gray-500 hover:text-blue-600 relative">
+                 <button 
+                    onClick={handleWishlistClick}
+                    className={`flex flex-col items-center hover:text-blue-600 relative ${view === 'wishlist' ? 'text-blue-600' : 'text-gray-500'}`}
+                 >
                     <Heart size={20} className={wishlist.length > 0 ? "text-red-500 fill-red-500" : ""} />
                     <span className="text-[10px] font-bold mt-1">LISTS</span>
                     {wishlist.length > 0 && <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border border-white"></span>}
@@ -600,7 +1174,6 @@ export default function App() {
             </div>
           </div>
           
-          {/* Mobile Search */}
           <div className="lg:hidden pb-4">
             <div className="relative">
                <input
@@ -616,98 +1189,120 @@ export default function App() {
         </div>
       </header>
 
-      {/* Main Layout */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col lg:flex-row gap-8">
-          
-          {/* Sidebar */}
-          <aside className={`lg:w-64 flex-shrink-0 ${isMobileMenuOpen ? 'block' : 'hidden lg:block'}`}>
-            <nav className="sticky top-24 space-y-8">
-              <div>
-                <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <Filter size={18} /> Departments
-                </h3>
-                <div className="space-y-1">
-                  {CATEGORIES.map(cat => (
-                    <button
-                      key={cat.id}
-                      onClick={() => {
-                        setActiveCategory(cat.id);
-                        setIsMobileMenuOpen(false);
-                      }}
-                      className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
-                        activeCategory === cat.id 
-                          ? 'bg-blue-50 text-blue-700 font-semibold border-l-4 border-blue-600' 
-                          : 'text-gray-600 hover:bg-gray-100 border-l-4 border-transparent'
-                      }`}
-                    >
-                      {cat.name}
-                    </button>
+      {/* VIEW RENDER LOGIC */}
+      {view === 'register' ? (
+        <RegistrationView onBack={() => setView('shop')} />
+      ) : view === 'terms' ? (
+        <TermsView onBack={() => setView('shop')} />
+      ) : view === 'privacy' ? (
+        <PrivacyView onBack={() => setView('shop')} />
+      ) : (
+        /* SHOP & WISHLIST VIEW */
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex flex-col lg:flex-row gap-8">
+            
+            <aside className={`lg:w-64 flex-shrink-0 ${isMobileMenuOpen ? 'block' : 'hidden lg:block'}`}>
+              <nav className="sticky top-24 space-y-8">
+                <div>
+                  <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <Filter size={18} /> Departments
+                  </h3>
+                  <div className="space-y-1">
+                    {CATEGORIES.map(cat => (
+                      <button
+                        key={cat.id}
+                        onClick={() => handleCategoryClick(cat.id)}
+                        className={`w-full text-left px-3 py-2 rounded-lg text-sm transition-colors ${
+                          activeCategory === cat.id && view === 'shop'
+                            ? 'bg-blue-50 text-blue-700 font-semibold border-l-4 border-blue-600' 
+                            : 'text-gray-600 hover:bg-gray-100 border-l-4 border-transparent'
+                        }`}
+                      >
+                        {cat.name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="bg-slate-800 rounded-xl p-6 text-white text-center shadow-lg shadow-slate-500/20 relative overflow-hidden group cursor-pointer">
+                  <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12 transition-transform group-hover:scale-150 duration-700"></div>
+                  <Truck size={32} className="text-blue-400 mx-auto mb-3 relative z-10" />
+                  <h4 className="font-bold text-lg mb-1 relative z-10">Free Shipping</h4>
+                  <p className="text-sm text-slate-300 mb-4 relative z-10">On bulk orders over $500.</p>
+                  <div className="w-full bg-blue-600 text-white font-bold py-2 rounded-lg text-sm group-hover:bg-blue-500 transition-colors relative z-10">
+                     View Details
+                  </div>
+                </div>
+              </nav>
+            </aside>
+
+            <main className="flex-1">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                    {view === 'wishlist' ? (
+                       <>
+                          <Heart className="text-red-500 fill-red-500" /> Your Wishlist
+                       </>
+                    ) : (
+                       activeCategory === 'all' ? 'Featured Products' : CATEGORIES.find(c => c.id === activeCategory)?.name
+                    )}
+                  </h2>
+                  <p className="text-gray-500 text-sm mt-1">Showing {processedProducts.length} items</p>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <span className="text-sm text-gray-500">Sort:</span>
+                  <select 
+                     className="bg-white border border-gray-300 text-gray-700 text-sm rounded-lg p-2 cursor-pointer focus:border-blue-500 outline-none"
+                     value={sortOption}
+                     onChange={(e) => setSortOption(e.target.value)}
+                  >
+                    <option value="relevance">Relevance</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="rating">Top Rated</option>
+                  </select>
+                </div>
+              </div>
+
+              {view === 'wishlist' && processedProducts.length === 0 ? (
+                 <div className="text-center py-24 bg-white rounded-xl border border-dashed border-gray-300">
+                    <Heart className="text-gray-300 mx-auto mb-4" size={48} />
+                    <h3 className="text-lg font-bold text-gray-900">Your wishlist is empty</h3>
+                    <p className="text-gray-500 mt-2 mb-6">Save items you want to buy later.</p>
+                    <Button variant="outline" onClick={() => setView('shop')}>
+                       Browse Products
+                    </Button>
+                 </div>
+              ) : processedProducts.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {processedProducts.map(product => (
+                    <ProductCard 
+                      key={product.id} 
+                      product={product} 
+                      onAdd={addToCart} 
+                      onView={setSelectedProduct}
+                      isLiked={wishlist.includes(product.id)}
+                      onToggleLike={toggleWishlist}
+                    />
                   ))}
                 </div>
-              </div>
-
-              {/* Promo Widget */}
-              <div className="bg-slate-800 rounded-xl p-6 text-white text-center shadow-lg shadow-slate-500/20 relative overflow-hidden group cursor-pointer">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12 transition-transform group-hover:scale-150 duration-700"></div>
-                <Truck size={32} className="text-blue-400 mx-auto mb-3 relative z-10" />
-                <h4 className="font-bold text-lg mb-1 relative z-10">Free Shipping</h4>
-                <p className="text-sm text-slate-300 mb-4 relative z-10">On bulk orders over $500.</p>
-                <div className="w-full bg-blue-600 text-white font-bold py-2 rounded-lg text-sm group-hover:bg-blue-500 transition-colors relative z-10">
-                   View Details
+              ) : (
+                <div className="text-center py-24 bg-white rounded-xl border border-dashed border-gray-300">
+                  <Search className="text-gray-300 mx-auto mb-4" size={48} />
+                  <h3 className="text-lg font-bold text-gray-900">No results found</h3>
+                  <p className="text-gray-500 mt-2 mb-6">We couldn't find matches for "{searchQuery}"</p>
+                  <Button variant="outline" onClick={() => {setSearchQuery(''); setActiveCategory('all'); setView('shop')}}>
+                    Reset Filters
+                  </Button>
                 </div>
-              </div>
-            </nav>
-          </aside>
-
-          {/* Product Grid Area */}
-          <main className="flex-1">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
-              <div>
-                <h2 className="text-2xl font-bold text-gray-900">
-                  {activeCategory === 'all' ? 'Featured Products' : CATEGORIES.find(c => c.id === activeCategory)?.name}
-                </h2>
-                <p className="text-gray-500 text-sm mt-1">Showing {filteredProducts.length} items available for immediate dispatch.</p>
-              </div>
-              
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-500">Sort:</span>
-                <select className="bg-white border border-gray-300 text-gray-700 text-sm rounded-lg p-2 cursor-pointer focus:border-blue-500 outline-none">
-                  <option>Relevance</option>
-                  <option>Price: Low to High</option>
-                  <option>Price: High to Low</option>
-                </select>
-              </div>
-            </div>
-
-            {filteredProducts.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredProducts.map(product => (
-                  <ProductCard 
-                    key={product.id} 
-                    product={product} 
-                    onAdd={addToCart} 
-                    onView={setSelectedProduct}
-                    isLiked={wishlist.includes(product.id)}
-                    onToggleLike={toggleWishlist}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-24 bg-white rounded-xl border border-dashed border-gray-300">
-                <Search className="text-gray-300 mx-auto mb-4" size={48} />
-                <h3 className="text-lg font-bold text-gray-900">No results found</h3>
-                <p className="text-gray-500 mt-2 mb-6">We couldn't find matches for "{searchQuery}"</p>
-                <Button variant="outline" onClick={() => {setSearchQuery(''); setActiveCategory('all')}}>
-                  Reset Filters
-                </Button>
-              </div>
-            )}
-          </main>
+              )}
+            </main>
+          </div>
         </div>
-      </div>
+      )}
 
-      {/* Footer */}
       <footer className="bg-white border-t border-gray-200 mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -725,17 +1320,16 @@ export default function App() {
               <div>
                  <h4 className="font-bold text-gray-900 mb-4">Company</h4>
                  <ul className="space-y-2 text-sm text-gray-600">
-                    <li>About Us</li>
-                    <li>Careers</li>
-                    <li>Investor Relations</li>
+                    <li><button onClick={() => setView('shop')} className="hover:text-blue-600">Home</button></li>
+                    <li><button className="hover:text-blue-600">About Us</button></li>
                  </ul>
               </div>
               <div>
-                 <h4 className="font-bold text-gray-900 mb-4">Support</h4>
+                 <h4 className="font-bold text-gray-900 mb-4">Legal & Support</h4>
                  <ul className="space-y-2 text-sm text-gray-600">
-                    <li>Help Center</li>
-                    <li>Terms of Service</li>
-                    <li>Privacy Policy</li>
+                    <li><button onClick={() => setView('terms')} className="hover:text-blue-600">Terms of Service</button></li>
+                    <li><button onClick={() => setView('privacy')} className="hover:text-blue-600">Privacy Policy</button></li>
+                    <li><button className="hover:text-blue-600">Help Center</button></li>
                  </ul>
               </div>
               <div>
@@ -750,7 +1344,6 @@ export default function App() {
         </div>
       </footer>
 
-      {/* PRODUCT DETAIL MODAL */}
       <ProductDetailModal 
         product={selectedProduct}
         isOpen={!!selectedProduct}
@@ -760,7 +1353,6 @@ export default function App() {
         onToggleLike={toggleWishlist}
       />
 
-      {/* Cart Drawer */}
       {isCartOpen && (
         <div className="fixed inset-0 z-50 flex justify-end">
           <div 
@@ -840,7 +1432,7 @@ export default function App() {
                   <span>${(cartTotal * 1.08).toFixed(2)}</span>
                 </div>
               </div>
-              <Button className="w-full py-4 text-lg shadow-lg shadow-blue-500/20 group">
+              <Button className="w-full py-4 text-lg shadow-lg shadow-blue-500/20 group" onClick={handleCheckout}>
                 Proceed to Checkout <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
               </Button>
             </div>
