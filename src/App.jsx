@@ -22,10 +22,16 @@ import {
   FileText,
   Lock,
   Building2,
-  Mail
+  Mail,
+  Phone,
+  HelpCircle,
+  LogOut,
+  CreditCard,
+  MapPin,
+  Loader2
 } from 'lucide-react';
 
-// --- Mock Data ---
+
 const CATEGORIES = [
   { id: 'all', name: 'All Departments' },
   { id: 'supplies', name: 'Office Supplies' },
@@ -35,7 +41,6 @@ const CATEGORIES = [
   { id: 'cleaning', name: 'Janitorial' },
 ];
 
-// Expanded Product List (approx 10 per category)
 const PRODUCTS = [
   // --- FURNITURE ---
   {
@@ -73,7 +78,7 @@ const PRODUCTS = [
     price: 299.00,
     rating: 4.7,
     reviews: 88,
-    image: 'https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&q=80&w=800',
+    image: 'https://modernwoodstyle.com/cdn/shop/files/walnut-standing-desk-with-storage-and-monitor-stand_1800x.jpg?v=1748571621',
     description: 'Electric height adjustable desk with memory settings.',
     sku: 'FUR-3301',
     stock: 120,
@@ -87,7 +92,7 @@ const PRODUCTS = [
     price: 899.00,
     rating: 4.6,
     reviews: 32,
-    image: 'https://images.unsplash.com/photo-1611269154421-4e27c41ebfg7?auto=format&fit=crop&q=80&w=800', // Placeholder
+    image: 'https://static.wixstatic.com/media/26b54c_6614afe76a6a49f18891220bcf0c8c78~mv2.jpg/v1/fill/w_947,h_986,al_c,q_85,enc_avif,quality_auto/26b54c_6614afe76a6a49f18891220bcf0c8c78~mv2.jpg', // Placeholder
     description: 'Spacious conference table with power outlets.',
     sku: 'FUR-8810',
     stock: 20,
@@ -115,7 +120,7 @@ const PRODUCTS = [
     price: 180.00,
     rating: 4.5,
     reviews: 210,
-    image: 'https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&q=80&w=800',
+    image: 'https://www.furniturecloud.co.uk/pub/media/catalog/product/d/c/dcf4s.jpg',
     description: 'Vertical locking filing cabinet.',
     sku: 'FUR-1102',
     stock: 200,
@@ -129,7 +134,7 @@ const PRODUCTS = [
     price: 120.00,
     rating: 4.4,
     reviews: 89,
-    image: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?auto=format&fit=crop&q=80&w=800',
+    image: 'https://www.sobefurniture.com/wp-content/uploads/2020/07/products-elanbookcase-scaled-scaled-500x500.jpg',
     description: '5-shelf standard bookcase.',
     sku: 'FUR-2201',
     stock: 150,
@@ -143,7 +148,7 @@ const PRODUCTS = [
     price: 45.99,
     rating: 4.3,
     reviews: 67,
-    image: 'https://images.unsplash.com/photo-1513506003013-d53163183a9a?auto=format&fit=crop&q=80&w=800',
+    image: 'https://m.media-amazon.com/images/I/81uGOoV8wZL._AC_UF894,1000_QL80_.jpg',
     description: 'Modern LED floor lamp for lounge areas.',
     sku: 'FUR-LED1',
     stock: 300,
@@ -173,7 +178,7 @@ const PRODUCTS = [
     price: 129.50,
     rating: 4.7,
     reviews: 890,
-    image: 'https://images.unsplash.com/photo-1587829741301-dc798b91add1?auto=format&fit=crop&q=80&w=800',
+    image: 'https://m.media-amazon.com/images/I/61P7MvyRbUL._AC_UF894,1000_QL80_.jpg',
     description: 'Tactile switches with multi-device bluetooth.',
     sku: 'TEC-1029',
     stock: 1200,
@@ -187,7 +192,7 @@ const PRODUCTS = [
     price: 349.99,
     rating: 4.6,
     reviews: 210,
-    image: 'https://images.unsplash.com/photo-1547394765-185e1e68f34e?auto=format&fit=crop&q=80&w=800',
+    image: 'https://www.bhphotovideo.com/cdn-cgi/image/fit=scale-down,width=500,quality=95/https://www.bhphotovideo.com/images/images500x500/dell_u2725qe_ultrasharp_27_4k_uhd_1745255323_1889853.jpg',
     description: 'Crystal clear resolution with color accuracy.',
     sku: 'TEC-3310',
     stock: 300,
@@ -229,7 +234,7 @@ const PRODUCTS = [
     price: 59.99,
     rating: 4.4,
     reviews: 320,
-    image: 'https://images.unsplash.com/photo-1590334882193-4ee52b04f762?auto=format&fit=crop&q=80&w=800', // Placeholder
+    image: 'https://c1.neweggimages.com/productimage/nb640/1EF-00ZZ-00001-S06.jpg', // Placeholder
     description: 'Wide angle webcam for conference calls.',
     sku: 'TEC-CAM1',
     stock: 600,
@@ -257,7 +262,7 @@ const PRODUCTS = [
     price: 199.99,
     rating: 4.6,
     reviews: 89,
-    image: 'https://images.unsplash.com/photo-1544197150-b99a580bbc7c?auto=format&fit=crop&q=80&w=800',
+    image: 'https://i5.walmartimages.com/seo/NETGEAR-Nighthawk-AX3000-WiFi-6-Router-3Gbps-RAX35_a0db0732-eeca-4fac-8532-20acf3df2f6e.171095d77e78a01732414e7d3d26f559.png?odnHeight=768&odnWidth=768&odnBg=FFFFFF',
     description: 'High speed internet router for small offices.',
     sku: 'TEC-ROUT1',
     stock: 120,
@@ -271,7 +276,7 @@ const PRODUCTS = [
     price: 12.99,
     rating: 4.5,
     reviews: 1200,
-    image: 'https://images.unsplash.com/photo-1558507340-a33753234479?auto=format&fit=crop&q=80&w=800', // Placeholder
+    image: 'https://www.pccables.com/images/01723.jpg', // Placeholder
     description: 'High speed braided HDMI cable.',
     sku: 'TEC-CAB1',
     stock: 5000,
@@ -285,7 +290,7 @@ const PRODUCTS = [
     price: 119.00,
     rating: 4.9,
     reviews: 340,
-    image: 'https://images.unsplash.com/photo-1597872258021-e9e3d64166c7?auto=format&fit=crop&q=80&w=800',
+    image: 'https://shop.sandisk.com/content/dam/store/en-us/assets/products/portable/sandisk-usb-3-2-ssd/gallery/sandisk-usb-3-2-ssd-front.png.thumb.1280.1280.png',
     description: 'Rugged portable storage.',
     sku: 'TEC-SSD1',
     stock: 250,
@@ -329,7 +334,7 @@ const PRODUCTS = [
     price: 15.99,
     rating: 4.4,
     reviews: 120,
-    image: 'https://images.unsplash.com/photo-1626294025985-709841804b40?auto=format&fit=crop&q=80&w=800',
+    image: 'https://media.accobrands.com/media/560-560/20932.jpg?width=1360px&height=898px',
     description: 'Staples up to 60 sheets.',
     sku: 'SUP-STAP1',
     stock: 600,
@@ -343,7 +348,7 @@ const PRODUCTS = [
     price: 9.99,
     rating: 4.7,
     reviews: 890,
-    image: 'https://images.unsplash.com/photo-1531346878377-a513bc95f30f?auto=format&fit=crop&q=80&w=800',
+    image: 'https://images-na.ssl-images-amazon.com/images/I/417yzGWgfWL.jpg',
     description: 'Yellow 3x3 sticky notes.',
     sku: 'SUP-NOTE1',
     stock: 3000,
@@ -357,7 +362,7 @@ const PRODUCTS = [
     price: 18.50,
     rating: 4.6,
     reviews: 230,
-    image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&q=80&w=800', // Generic paper
+    image: 'https://content.oppictures.com/Master_Images/Master_Variants/Variant_500/283305.JPG', // Generic paper
     description: 'Manila file folders letter size.',
     sku: 'SUP-FOLD1',
     stock: 1200,
@@ -371,7 +376,7 @@ const PRODUCTS = [
     price: 12.00,
     rating: 4.8,
     reviews: 560,
-    image: 'https://images.unsplash.com/photo-1595515106969-1ce29566ff1c?auto=format&fit=crop&q=80&w=800', // Generic desk
+    image: 'https://shop.dkoutlet.com/media/catalog/product/cache/2/image/9df78eab33525d08d6e5fb8d27136e95/S/A/SAN33001BX_L.jpg', // Generic desk
     description: 'Fine point black permanent markers.',
     sku: 'SUP-MARK1',
     stock: 1500,
@@ -385,7 +390,7 @@ const PRODUCTS = [
     price: 14.99,
     rating: 4.7,
     reviews: 400,
-    image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&q=80&w=800', // Generic
+    image: 'https://m.media-amazon.com/images/I/71vkTTOaBnL._AC_UF894,1000_QL80_.jpg', // Generic
     description: 'Invisible tape refill rolls.',
     sku: 'SUP-TAPE1',
     stock: 900,
@@ -399,7 +404,7 @@ const PRODUCTS = [
     price: 22.00,
     rating: 4.4,
     reviews: 150,
-    image: 'https://images.unsplash.com/photo-1586075010923-2dd4570fb338?auto=format&fit=crop&q=80&w=800', // Generic
+    image: 'https://www.bluesummitsupplies.com/cdn/shop/products/10-Single-Window-Security-Envelopes-020.jpg?v=1589984151&width=960', // Generic
     description: 'Security tinted envelopes, box of 500.',
     sku: 'SUP-ENV1',
     stock: 800,
@@ -429,7 +434,7 @@ const PRODUCTS = [
     price: 65.00,
     rating: 4.5,
     reviews: 120,
-    image: 'https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?auto=format&fit=crop&q=80&w=800',
+    image: 'https://i5.walmartimages.com/seo/1000-Pack-12oz-Disposable-White-Paper-Coffee-Cups-Black-Dome-Lids-For-Hot-Cold-Drink-Coffee-Tea-Cocoa-Travel-Office-Home-Cider-Hot-Chocolate-To-go-Co_c6f4e910-8c4b-43a5-a5c9-01c7166dcfd3.9dd8b21a79bfba513fb908416413621c.jpeg?odnHeight=768&odnWidth=768&odnBg=FFFFFF',
     description: 'Hot beverage cups, eco-friendly.',
     sku: 'BRK-CUP1',
     stock: 800,
@@ -443,7 +448,7 @@ const PRODUCTS = [
     price: 35.00,
     rating: 4.9,
     reviews: 80,
-    image: 'https://images.unsplash.com/photo-1623364639942-d3a339900227?auto=format&fit=crop&q=80&w=800',
+    image: 'https://www.pittmandavis.com/images/xl/PD24-SST.jpg?v=3',
     description: 'Chips, nuts, and bars variety pack.',
     sku: 'BRK-SNK1',
     stock: 200,
@@ -457,7 +462,7 @@ const PRODUCTS = [
     price: 12.99,
     rating: 4.7,
     reviews: 500,
-    image: 'https://images.unsplash.com/photo-1560023907-5f339617ea30?auto=format&fit=crop&q=80&w=800',
+    image: 'https://d13jicmd7uan86.cloudfront.net/923fe517-16f5-4027-a312-ae1e008ab857/725?format=webp',
     description: 'Bottled spring water 16.9oz.',
     sku: 'BRK-H2O1',
     stock: 1000,
@@ -471,7 +476,7 @@ const PRODUCTS = [
     price: 18.00,
     rating: 4.4,
     reviews: 90,
-    image: 'https://images.unsplash.com/photo-1585671759404-03709de2412e?auto=format&fit=crop&q=80&w=800', // Placeholder
+    image: 'https://cdn.shopify.com/s/files/1/1552/7691/files/72-pcs-navy-blue-heavy-duty-plastic-silverware-set-in-baroque-style-disposable-utensils-knife-fork-and-spoon-set.jpg?v=1764377226&width=1000&crop=center', // Placeholder
     description: 'Forks, spoons, knives heavy duty.',
     sku: 'BRK-FORK1',
     stock: 600,
@@ -499,7 +504,7 @@ const PRODUCTS = [
     price: 9.00,
     rating: 4.3,
     reviews: 150,
-    image: 'https://images.unsplash.com/photo-1584622050111-993a426fbf0a?auto=format&fit=crop&q=80&w=800', // Placeholder
+    image: 'https://m.media-amazon.com/images/I/71zdyaOhr0L._AC_UF894,1000_QL80_.jpg', // Placeholder
     description: 'White beverage napkins.',
     sku: 'BRK-NAP1',
     stock: 800,
@@ -513,7 +518,7 @@ const PRODUCTS = [
     price: 10.00,
     rating: 4.6,
     reviews: 110,
-    image: 'https://images.unsplash.com/photo-1584736686461-a4891129f957?auto=format&fit=crop&q=80&w=800', // Placeholder
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLjgZfcjQbhlbGl7dm20XuE8V0VJ8xAKfWBQ&s', // Placeholder
     description: 'Pure cane sugar pour canisters.',
     sku: 'BRK-SUG1',
     stock: 300,
@@ -529,7 +534,7 @@ const PRODUCTS = [
     price: 14.99,
     rating: 4.7,
     reviews: 230,
-    image: 'https://images.unsplash.com/photo-1584622050111-993a426fbf0a?auto=format&fit=crop&q=80&w=800',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXFM4DD7NNGUJ5MmnU_Gnq6qi80Jv-4wGEFw&s',
     description: 'Industrial strength multi-surface cleaner.',
     sku: 'CLN-ALL1',
     stock: 400,
@@ -543,7 +548,7 @@ const PRODUCTS = [
     price: 28.00,
     rating: 4.6,
     reviews: 560,
-    image: 'https://images.unsplash.com/photo-1583947581924-860bda6a26df?auto=format&fit=crop&q=80&w=800',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-k1yGiNDQrJdpqYs1jNc8C2ej_Nbmwb4ZdA&s',
     description: 'High absorbency paper towels.',
     sku: 'CLN-TOW1',
     stock: 1200,
@@ -557,7 +562,7 @@ const PRODUCTS = [
     price: 35.00,
     rating: 4.8,
     reviews: 400,
-    image: 'https://images.unsplash.com/photo-1584483766114-2cea6fac257d?auto=format&fit=crop&q=80&w=800',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRao1xGU32hEDZ4NnMQSQ0uNTVoLAMJ4-O9-Q&s',
     description: '70% Alcohol gel sanitizer refill.',
     sku: 'CLN-SAN1',
     stock: 800,
@@ -571,7 +576,7 @@ const PRODUCTS = [
     price: 19.99,
     rating: 4.5,
     reviews: 320,
-    image: 'https://images.unsplash.com/photo-1622976655182-35805566085e?auto=format&fit=crop&q=80&w=800', // Placeholder
+    image: 'https://m.media-amazon.com/images/I/71UAp4Xsu7L._AC_UF894,1000_QL80_.jpg', // Placeholder
     description: 'Heavy duty drawstring kitchen bags.',
     sku: 'CLN-BAG1',
     stock: 600,
@@ -585,7 +590,7 @@ const PRODUCTS = [
     price: 16.50,
     rating: 4.9,
     reviews: 210,
-    image: 'https://images.unsplash.com/photo-1581557991964-125469da3b8a?auto=format&fit=crop&q=80&w=800', // Placeholder
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXEUfImnF_ww9yBvzceGV4WMNep0e18A7X0g&s', // Placeholder
     description: 'Lint-free cleaning cloths.',
     sku: 'CLN-CLTH1',
     stock: 900,
@@ -599,7 +604,7 @@ const PRODUCTS = [
     price: 45.00,
     rating: 4.4,
     reviews: 180,
-    image: 'https://images.unsplash.com/photo-1585832664987-9b626154620a?auto=format&fit=crop&q=80&w=800', // Placeholder
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQha9fwjeHI59pI-dIVMTIyP33HH_iYDX6cPA&s', // Placeholder
     description: 'Moisturizing hand soap refill case.',
     sku: 'CLN-SOAP1',
     stock: 300,
@@ -613,7 +618,7 @@ const PRODUCTS = [
     price: 9.99,
     rating: 4.3,
     reviews: 80,
-    image: 'https://images.unsplash.com/photo-1527512860502-ce2200dc89d6?auto=format&fit=crop&q=80&w=800', // Placeholder
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYTvfieVMNTG_lRqTVOuquhdwlgNUGg4Hp3A&s', // Placeholder
     description: 'Cotton loop end mop head replacement.',
     sku: 'CLN-MOP1',
     stock: 500,
@@ -627,7 +632,7 @@ const PRODUCTS = [
     price: 38.00,
     rating: 4.8,
     reviews: 600,
-    image: 'https://images.unsplash.com/photo-1584483766114-2cea6fac257d?auto=format&fit=crop&q=80&w=800', // Placeholder
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDkwbwn1RuNNbmjHFJea49H2K9_1SEhIcx9w&s', // Placeholder
     description: 'Kills 99.9% of viruses and bacteria.',
     sku: 'CLN-SPRY1',
     stock: 400,
@@ -636,7 +641,48 @@ const PRODUCTS = [
   }
 ];
 
+// --- AUTH UTILS ---
+// Simulates a JSON database in localStorage
+const MOCK_DB_KEY = 'wheels_commerce_users_db';
+
+const AuthService = {
+  getUsers: () => {
+    return JSON.parse(localStorage.getItem(MOCK_DB_KEY) || '[]');
+  },
+  
+  register: (user) => {
+    const users = AuthService.getUsers();
+    // Check if email exists
+    if (users.find(u => u.email === user.email)) {
+      return { success: false, message: 'Email already registered.' };
+    }
+    const newUser = { ...user, id: Date.now(), createdAt: new Date().toISOString() };
+    users.push(newUser);
+    localStorage.setItem(MOCK_DB_KEY, JSON.stringify(users));
+    return { success: true, user: newUser };
+  },
+
+  login: (email, password) => {
+    const users = AuthService.getUsers();
+    const user = users.find(u => u.email === email && u.password === password);
+    if (user) return { success: true, user };
+    return { success: false, message: 'Invalid credentials.' };
+  }
+};
+
 // --- Sub-Components ---
+
+const Loader = () => (
+  <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-white/90 backdrop-blur-sm">
+    <div className="relative">
+      <div className="w-16 h-16 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
+      <div className="absolute inset-0 flex items-center justify-center">
+        <Truck size={24} className="text-blue-600" />
+      </div>
+    </div>
+    <p className="mt-4 text-blue-900 font-bold animate-pulse">Loading Wheels Commerce...</p>
+  </div>
+);
 
 const Button = ({ children, variant = 'primary', className = '', ...props }) => {
   const baseStyle = "px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed";
@@ -880,60 +926,198 @@ const ProductDetailModal = ({ product, isOpen, onClose, onAdd, isLiked, onToggle
 
 // --- VIEW COMPONENTS ---
 
-const RegistrationView = ({ onBack }) => (
-  <div className="max-w-xl mx-auto py-12 px-4 animate-in slide-in-from-bottom-5">
-    <button onClick={onBack} className="flex items-center text-gray-500 hover:text-blue-600 mb-6">
-      <ArrowLeft size={16} className="mr-2" /> Back to Shop
-    </button>
-    <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
-      <div className="text-center mb-8">
-        <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
-          <User size={32} />
+const RegistrationView = ({ onBack, onRegister, onSwitchToLogin }) => {
+  const [form, setForm] = useState({ firstName: '', lastName: '', company: '', email: '', password: '' });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (form.firstName && form.email && form.password) {
+      onRegister(form);
+    }
+  };
+
+  return (
+    <div className="max-w-xl mx-auto py-12 px-4 animate-in slide-in-from-bottom-5">
+      <button onClick={onBack} className="flex items-center text-gray-500 hover:text-blue-600 mb-6">
+        <ArrowLeft size={16} className="mr-2" /> Back to Shop
+      </button>
+      <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+        <div className="text-center mb-8">
+          <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <User size={32} />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900">Create Business Account</h2>
+          <p className="text-gray-500 mt-2">Join Wheels Commerce to access wholesale pricing.</p>
         </div>
-        <h2 className="text-2xl font-bold text-gray-900">Create Business Account</h2>
-        <p className="text-gray-500 mt-2">Join Wheels Commerce to access wholesale pricing.</p>
+
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+              <input required type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" onChange={e => setForm({...form, firstName: e.target.value})} />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+              <input required type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" onChange={e => setForm({...form, lastName: e.target.value})} />
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+            <div className="relative">
+               <Building2 size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+               <input type="text" className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" onChange={e => setForm({...form, company: e.target.value})} />
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Work Email</label>
+             <div className="relative">
+               <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+               <input required type="email" className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" onChange={e => setForm({...form, email: e.target.value})} />
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+             <div className="relative">
+               <Lock size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+               <input required type="password" className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" onChange={e => setForm({...form, password: e.target.value})} />
+            </div>
+          </div>
+          
+          <div className="pt-4">
+            <Button className="w-full py-3 text-lg">Create Account</Button>
+          </div>
+          <div className="text-center mt-4">
+            <p className="text-sm text-gray-600">
+              Already have an account? <button type="button" onClick={onSwitchToLogin} className="text-blue-600 font-semibold hover:underline">Log in</button>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+const LoginView = ({ onBack, onLogin, onSwitchToRegister }) => {
+  const [form, setForm] = useState({ email: '', password: '' });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onLogin(form.email, form.password);
+  };
+
+  return (
+    <div className="max-w-md mx-auto py-12 px-4 animate-in slide-in-from-bottom-5">
+      <button onClick={onBack} className="flex items-center text-gray-500 hover:text-blue-600 mb-6">
+        <ArrowLeft size={16} className="mr-2" /> Back to Shop
+      </button>
+      <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold text-gray-900">Welcome Back</h2>
+          <p className="text-gray-500 mt-2">Log in to your business account</p>
+        </div>
+
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+             <div className="relative">
+               <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+               <input required type="email" className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" onChange={e => setForm({...form, email: e.target.value})} />
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+             <div className="relative">
+               <Lock size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+               <input required type="password" className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" onChange={e => setForm({...form, password: e.target.value})} />
+            </div>
+          </div>
+          
+          <div className="pt-4">
+            <Button className="w-full py-3 text-lg">Log In</Button>
+          </div>
+          <div className="text-center mt-4">
+            <p className="text-sm text-gray-600">
+              New customer? <button type="button" onClick={onSwitchToRegister} className="text-blue-600 font-semibold hover:underline">Create Account</button>
+            </p>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+const ProfileView = ({ user, onLogout, onBack }) => (
+  <div className="max-w-4xl mx-auto py-12 px-4 animate-in fade-in">
+    <div className="flex items-center justify-between mb-8">
+      <h1 className="text-3xl font-bold text-gray-900">My Profile</h1>
+      <button onClick={onLogout} className="flex items-center gap-2 text-red-600 hover:bg-red-50 px-4 py-2 rounded-lg transition-colors">
+        <LogOut size={18} /> Sign Out
+      </button>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Profile Card */}
+      <div className="col-span-1 bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+        <div className="flex flex-col items-center text-center mb-6">
+          <div className="w-20 h-20 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center mb-4 text-2xl font-bold">
+            {user.firstName[0]}{user.lastName[0]}
+          </div>
+          <h2 className="text-xl font-bold text-gray-900">{user.firstName} {user.lastName}</h2>
+          <p className="text-gray-500 text-sm">{user.company}</p>
+          <div className="mt-2 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+            Verified Business
+          </div>
+        </div>
+        <div className="space-y-3 pt-6 border-t border-gray-100">
+          <div className="flex items-center gap-3 text-gray-600">
+            <Mail size={18} /> <span className="text-sm">{user.email}</span>
+          </div>
+          <div className="flex items-center gap-3 text-gray-600">
+            <Building2 size={18} /> <span className="text-sm">{user.company || 'Individual Account'}</span>
+          </div>
+        </div>
       </div>
 
-      <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+      {/* Stats/Dashboard */}
+      <div className="col-span-1 md:col-span-2 space-y-6">
+        <div className="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-xl p-6 text-white shadow-lg">
+          <h3 className="font-bold text-lg mb-1">Welcome back, {user.firstName}!</h3>
+          <p className="text-blue-100 text-sm mb-4">You have access to exclusive wholesale pricing.</p>
+          <div className="flex gap-4">
+             <div className="bg-white/20 px-4 py-2 rounded-lg backdrop-blur-sm">
+                <span className="block text-2xl font-bold">0</span>
+                <span className="text-xs text-blue-100">Active Orders</span>
+             </div>
+             <div className="bg-white/20 px-4 py-2 rounded-lg backdrop-blur-sm">
+                <span className="block text-2xl font-bold">$0.00</span>
+                <span className="text-xs text-blue-100">Spend YTD</span>
+             </div>
+          </div>
+        </div>
+
         <div className="grid grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-            <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-            <input type="text" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
-          </div>
+           <button onClick={onBack} className="p-4 bg-white border border-gray-200 rounded-xl hover:border-blue-500 hover:shadow-md transition-all text-left group">
+              <ShoppingCart className="text-blue-600 mb-2 group-hover:scale-110 transition-transform" />
+              <div className="font-bold text-gray-900">Start Shopping</div>
+              <div className="text-xs text-gray-500">Browse catalog</div>
+           </button>
+           <div className="p-4 bg-white border border-gray-200 rounded-xl text-left opacity-60 cursor-not-allowed">
+              <CreditCard className="text-gray-400 mb-2" />
+              <div className="font-bold text-gray-900">Payment Methods</div>
+              <div className="text-xs text-gray-500">Manage cards</div>
+           </div>
+           <div className="p-4 bg-white border border-gray-200 rounded-xl text-left opacity-60 cursor-not-allowed">
+              <MapPin className="text-gray-400 mb-2" />
+              <div className="font-bold text-gray-900">Addresses</div>
+              <div className="text-xs text-gray-500">Manage shipping</div>
+           </div>
+           <div className="p-4 bg-white border border-gray-200 rounded-xl text-left opacity-60 cursor-not-allowed">
+              <FileText className="text-gray-400 mb-2" />
+              <div className="font-bold text-gray-900">Invoices</div>
+              <div className="text-xs text-gray-500">View history</div>
+           </div>
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
-          <div className="relative">
-             <Building2 size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-             <input type="text" className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
-          </div>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Work Email</label>
-           <div className="relative">
-             <Mail size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-             <input type="email" className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
-          </div>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-           <div className="relative">
-             <Lock size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
-             <input type="password" className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" />
-          </div>
-        </div>
-        
-        <div className="pt-4">
-          <Button className="w-full py-3 text-lg">Create Account</Button>
-        </div>
-        <p className="text-xs text-center text-gray-500 mt-4">
-          By registering, you agree to our Terms of Service and Privacy Policy.
-        </p>
-      </form>
+      </div>
     </div>
   </div>
 );
@@ -948,7 +1132,7 @@ const TermsView = ({ onBack }) => (
         <FileText className="text-blue-600" /> Terms of Service
       </h1>
       <div className="prose prose-blue max-w-none text-gray-600 space-y-4">
-        <p><strong>Effective Date:</strong> January 1, 2026</p>
+        <p><strong>Effective Date:</strong> January 1, 2024</p>
         <p>Welcome to Wheels Commerce. By accessing or using our website, you agree to be bound by these Terms of Service.</p>
         
         <h3 className="text-lg font-bold text-gray-900">1. Acceptance of Terms</h3>
@@ -977,7 +1161,7 @@ const PrivacyView = ({ onBack }) => (
         <Shield className="text-green-600" /> Privacy Policy
       </h1>
       <div className="prose prose-blue max-w-none text-gray-600 space-y-4">
-        <p><strong>Last Updated:</strong> January 1, 2026</p>
+        <p><strong>Last Updated:</strong> January 1, 2024</p>
         <p>Wheels Commerce is committed to protecting your privacy. This policy explains how we collect and use your data.</p>
         
         <h3 className="text-lg font-bold text-gray-900">1. Information We Collect</h3>
@@ -993,21 +1177,150 @@ const PrivacyView = ({ onBack }) => (
   </div>
 );
 
+const AboutView = ({ onBack }) => (
+  <div className="max-w-3xl mx-auto py-12 px-4 animate-in fade-in">
+    <button onClick={onBack} className="flex items-center text-gray-500 hover:text-blue-600 mb-6">
+      <ArrowLeft size={16} className="mr-2" /> Back
+    </button>
+    <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
+      <h1 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+        <Building2 className="text-blue-600" /> About Wheels Commerce
+      </h1>
+      <div className="prose prose-blue max-w-none text-gray-600 space-y-4">
+        <p className="text-lg leading-relaxed">
+          Established in 2024, <strong>Wheels Commerce</strong> has rapidly evolved into the premier logistics and procurement partner for businesses across the nation.
+        </p>
+        <p>
+          We understand that modern businesses need more than just office supplies; they need a reliable supply chain that moves as fast as they do. Our name, "Wheels," represents our commitment to momentum—keeping your business moving forward without interruption.
+        </p>
+        <h3 className="text-lg font-bold text-gray-900 mt-6">Our Mission</h3>
+        <p>To streamline B2B procurement through technology-driven logistics and competitive volume pricing.</p>
+        <h3 className="text-lg font-bold text-gray-900 mt-6">Why Choose Us?</h3>
+        <ul className="list-disc pl-5 space-y-2">
+          <li><strong>Speed:</strong> Nationwide delivery network optimized for speed.</li>
+          <li><strong>Value:</strong> Direct-to-business wholesale pricing.</li>
+          <li><strong>Service:</strong> Dedicated account managers for enterprise clients.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+);
+
+const HelpView = ({ onBack }) => (
+  <div className="max-w-3xl mx-auto py-12 px-4 animate-in fade-in">
+    <button onClick={onBack} className="flex items-center text-gray-500 hover:text-blue-600 mb-6">
+      <ArrowLeft size={16} className="mr-2" /> Back
+    </button>
+    <div className="bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
+      <h1 className="text-3xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+        <HelpCircle className="text-blue-600" /> Help Center
+      </h1>
+      <div className="space-y-6">
+        <div>
+          <h3 className="font-bold text-gray-900 text-lg mb-2">Frequently Asked Questions</h3>
+          <div className="space-y-4">
+            <div className="p-4 bg-gray-50 rounded-lg">
+              <h4 className="font-semibold text-gray-900">How do I qualify for Net-30 terms?</h4>
+              <p className="text-sm text-gray-600 mt-1">Registered businesses with a valid EIN and 6 months of operating history can apply for Net-30 terms through their account dashboard.</p>
+            </div>
+            <div className="p-4 bg-gray-50 rounded-lg">
+              <h4 className="font-semibold text-gray-900">What is your return policy?</h4>
+              <p className="text-sm text-gray-600 mt-1">We accept returns on unopened items within 30 days. Defective items can be exchanged immediately. Bulk orders may be subject to a restocking fee.</p>
+            </div>
+            <div className="p-4 bg-gray-50 rounded-lg">
+              <h4 className="font-semibold text-gray-900">Do you offer samples?</h4>
+              <p className="text-sm text-gray-600 mt-1">Yes! Enterprise accounts can request product samples for furniture and custom supplies. Contact your account manager.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="border-t border-gray-100 pt-6">
+          <h3 className="font-bold text-gray-900 mb-4">Need more help?</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <button className="flex items-center justify-center gap-2 p-4 border border-gray-200 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-colors">
+              <Mail size={20} className="text-blue-600" />
+              <span className="font-medium">Email Support</span>
+            </button>
+            <button className="flex items-center justify-center gap-2 p-4 border border-gray-200 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-colors">
+              <Phone size={20} className="text-blue-600" />
+              <span className="font-medium">Call 17162952930</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 
 // --- Main App Logic ---
 
 export default function App() {
-  const [view, setView] = useState('shop'); // 'shop', 'wishlist', 'register', 'terms', 'privacy'
+  const [view, setView] = useState('shop'); // 'shop', 'wishlist', 'register', 'login', 'profile', 'terms', 'privacy', 'about', 'help'
   const [activeCategory, setActiveCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [sortOption, setSortOption] = useState('relevance');
   
+  const [user, setUser] = useState(null);
   const [cart, setCart] = useState([]);
   const [wishlist, setWishlist] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [toast, setToast] = useState(null);
+  const [isLoading, setIsLoading] = useState(true); // Global loader state
+
+  // Initial App Load Simulation
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // SCROLL TO TOP EFFECT
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [view]);
+
+  // --- Auth Handlers ---
+  const handleRegister = (newUser) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      const result = AuthService.register(newUser);
+      if (result.success) {
+        setUser(result.user);
+        setView('shop');
+        showToast(`Welcome, ${result.user.firstName}! Account created.`);
+      } else {
+        showToast(result.message, 'error');
+      }
+      setIsLoading(false);
+    }, 1500); // Simulate network delay
+  };
+
+  const handleLogin = (email, password) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      const result = AuthService.login(email, password);
+      if (result.success) {
+        setUser(result.user);
+        setView('shop');
+        showToast(`Welcome back, ${result.user.firstName}!`);
+      } else {
+        showToast(result.message, 'error');
+      }
+      setIsLoading(false);
+    }, 1500); // Simulate network delay
+  };
+
+  const handleLogout = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setUser(null);
+      setView('login');
+      showToast('You have been logged out.');
+      setIsLoading(false);
+    }, 800);
+  };
 
   // --- Processed Products (Filter -> Search -> Sort) ---
   const processedProducts = useMemo(() => {
@@ -1082,7 +1395,12 @@ export default function App() {
 
   const handleCheckout = () => {
     setIsCartOpen(false);
-    setView('register');
+    if (user) {
+      showToast("Order placed successfully! (Mock)", "success");
+    } else {
+      setView('login');
+      showToast("Please log in to checkout", "info");
+    }
   };
 
   const cartTotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
@@ -1100,8 +1418,17 @@ export default function App() {
     setIsMobileMenuOpen(false);
   };
 
+  const handleAccountClick = () => {
+    if (user) {
+      setView('profile');
+    } else {
+      setView('login');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans text-gray-900 relative">
+      {isLoading && <Loader />}
       {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
 
       <div className="bg-slate-900 text-white text-xs py-2 px-4 text-center">
@@ -1141,10 +1468,10 @@ export default function App() {
               <div className="hidden sm:flex items-center gap-4 mr-2">
                  <button 
                    className="flex flex-col items-center text-gray-500 hover:text-blue-600"
-                   onClick={() => setView('register')}
+                   onClick={handleAccountClick}
                  >
-                    <User size={20} />
-                    <span className="text-[10px] font-bold mt-1">ACCOUNT</span>
+                    <User size={20} className={user ? "text-blue-600 fill-blue-100" : ""} />
+                    <span className="text-[10px] font-bold mt-1">{user ? 'PROFILE' : 'LOGIN'}</span>
                  </button>
                  <button 
                     onClick={handleWishlistClick}
@@ -1191,11 +1518,31 @@ export default function App() {
 
       {/* VIEW RENDER LOGIC */}
       {view === 'register' ? (
-        <RegistrationView onBack={() => setView('shop')} />
+        <RegistrationView 
+          onBack={() => setView('shop')} 
+          onRegister={handleRegister} 
+          onSwitchToLogin={() => setView('login')}
+        />
+      ) : view === 'login' ? (
+        <LoginView 
+          onBack={() => setView('shop')} 
+          onLogin={handleLogin}
+          onSwitchToRegister={() => setView('register')}
+        />
+      ) : view === 'profile' && user ? (
+        <ProfileView 
+          user={user} 
+          onLogout={handleLogout}
+          onBack={() => setView('shop')}
+        />
       ) : view === 'terms' ? (
         <TermsView onBack={() => setView('shop')} />
       ) : view === 'privacy' ? (
         <PrivacyView onBack={() => setView('shop')} />
+      ) : view === 'about' ? (
+        <AboutView onBack={() => setView('shop')} />
+      ) : view === 'help' ? (
+        <HelpView onBack={() => setView('shop')} />
       ) : (
         /* SHOP & WISHLIST VIEW */
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -1222,6 +1569,32 @@ export default function App() {
                       </button>
                     ))}
                   </div>
+                </div>
+
+                {/* Mobile Only: User Actions */}
+                <div className="lg:hidden border-t border-gray-200 pt-6 mt-6">
+                  <h3 className="font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <User size={18} /> Account
+                  </h3>
+                  <ul className="space-y-3">
+                    <li>
+                      <button 
+                        onClick={() => { handleAccountClick(); setIsMobileMenuOpen(false); }}
+                        className="flex items-center gap-2 text-gray-600 hover:text-blue-600 w-full"
+                      >
+                        <User size={16} /> {user ? 'My Profile' : 'Login / Register'}
+                      </button>
+                    </li>
+                    <li>
+                      <button 
+                        onClick={() => { handleWishlistClick(); setIsMobileMenuOpen(false); }}
+                        className="flex items-center gap-2 text-gray-600 hover:text-blue-600 w-full"
+                      >
+                        <Heart size={16} /> Wishlist
+                        {wishlist.length > 0 && <span className="bg-red-500 text-white text-xs px-1.5 rounded-full">{wishlist.length}</span>}
+                      </button>
+                    </li>
+                  </ul>
                 </div>
 
                 <div className="bg-slate-800 rounded-xl p-6 text-white text-center shadow-lg shadow-slate-500/20 relative overflow-hidden group cursor-pointer">
@@ -1314,14 +1687,14 @@ export default function App() {
                     <span className="font-bold text-lg text-slate-900">WheelsCommerce</span>
                  </div>
                  <p className="text-sm text-gray-500 leading-relaxed">
-                    Your trusted partner in B2B logistics and office procurement. Delivering excellence since 2026.
+                    Your trusted partner in B2B logistics and office procurement. Delivering excellence since 2024.
                  </p>
               </div>
               <div>
                  <h4 className="font-bold text-gray-900 mb-4">Company</h4>
                  <ul className="space-y-2 text-sm text-gray-600">
                     <li><button onClick={() => setView('shop')} className="hover:text-blue-600">Home</button></li>
-                    <li><button className="hover:text-blue-600">About Us</button></li>
+                    <li><button onClick={() => setView('about')} className="hover:text-blue-600">About Us</button></li>
                  </ul>
               </div>
               <div>
@@ -1329,12 +1702,12 @@ export default function App() {
                  <ul className="space-y-2 text-sm text-gray-600">
                     <li><button onClick={() => setView('terms')} className="hover:text-blue-600">Terms of Service</button></li>
                     <li><button onClick={() => setView('privacy')} className="hover:text-blue-600">Privacy Policy</button></li>
-                    <li><button className="hover:text-blue-600">Help Center</button></li>
+                    <li><button onClick={() => setView('help')} className="hover:text-blue-600">Help Center</button></li>
                  </ul>
               </div>
               <div>
                  <h4 className="font-bold text-gray-900 mb-4">Contact</h4>
-                 <p className="text-sm text-gray-600 mb-2">1-800-WHEELS-B2B</p>
+                 <p className="text-sm text-gray-600 mb-2">17162952930</p>
                  <p className="text-sm text-gray-600">support@wheelscommerce.com</p>
               </div>
            </div>
